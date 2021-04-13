@@ -1,0 +1,28 @@
+.navigationOptions {
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  display: flex;
+}
+
+.titlePosition {
+  width: 100%;
+  align-items: center;
+  display: flex;
+}
+
+
+@media (max-width: 600px) {
+  .MuiDrawer-root > .MuiPaper-root {
+    top: 56px !important;
+  }
+}
+
+.MuiDrawer-root > .MuiPaper-root {
+  top: 64px;
+}
+
+/* This isn't mobile friendly but for a demo should be fine */
+.mainContent {
+  padding-left: 200px;
+}
