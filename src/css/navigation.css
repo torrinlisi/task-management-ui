@@ -56,3 +56,14 @@
   color: inherit;
   text-decoration: inherit;
 }
+
+.modalStyle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalPaper {
+  width: 40%;
+  height: 30%;
+}

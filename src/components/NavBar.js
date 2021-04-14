@@ -7,7 +7,6 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 
 export default function Home() {
   return (
