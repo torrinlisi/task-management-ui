@@ -1,5 +1,7 @@
+import Typography from '@material-ui/core/Typography';
+
 export default function Home() {
   return (
-    <h1>Hellllllllo</h1>
+    <Typography varient="h3" className="sectionHeader">Home</Typography>
   )
 }
