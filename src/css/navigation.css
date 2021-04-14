@@ -24,5 +24,46 @@
 
 /* This isn't mobile friendly but for a demo should be fine */
 .mainContent {
-  padding-left: 200px;
+  padding-left: 250px;
+  padding-right: 35px;
+  padding-top: 25px;
+}
+
+.sectionHeader {
+  font-size: 1.25rem !important; /* overwrite React Material UI */
+}
+
+.formContainer {
+  margin-top: 20px;
+  padding: 15px 30px 30px 30px;
+}
+
+.formButtonContainer {
+  float: right;
+  padding-top: 5px;
+}
+
+.headerLink {
+  color: white;
+  text-decoration: none;
+}
+
+.sideNav > div {
+  min-width: 200px;
+}
+
+.sideNavLink {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.modalStyle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalPaper {
+  width: 40%;
+  height: 30%;
 }
