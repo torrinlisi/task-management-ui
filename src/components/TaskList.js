@@ -9,6 +9,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 export default function TaskList() {
   const [tasks, setTasks] = useState([
@@ -49,6 +50,7 @@ export default function TaskList() {
 
     //call api to complete task
 
+    /* This is done below so that we don't have to call back to the api every time there is an update */
     //create array of tasks not reference
     let holdTasks = [...tasks];
 
@@ -63,12 +65,27 @@ export default function TaskList() {
 
     //call api to mark task incomplete
 
+    /* This is done below so that we don't have to call back to the api every time there is an update */
     //create array of tasks not reference
     let holdTasks = [...tasks];
 
     //set is complete to false
     holdTasks[index].isComplete = false;
     
+    //update state
+    setTasks(holdTasks);
+  }
+
+  const deleteTask = (index) => {
+    //call to delete task
+
+    /* This is done below so that we don't have to call back to the api every time there is an update */
+    //create array of tasks not reference
+    let holdTasks = [...tasks];
+
+    //remove deleted task
+    holdTasks.splice(index, 1);
+
     //update state
     setTasks(holdTasks);
   }
@@ -119,6 +136,10 @@ export default function TaskList() {
                     edge="end"
                   />
                 }
+                <DeleteIcon
+                  onClick={() => deleteTask(index)}
+                  edge="end"
+                />
                 </ListItemSecondaryAction>
             </ListItem>
           </>

@@ -6,6 +6,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
 import AddIcon from '@material-ui/icons/Add';
+import ListIcon from '@material-ui/icons/List';
 
 import { Link } from 'react-router-dom';
 
@@ -28,6 +29,12 @@ export default function SideBar() {
           <ListItem button key="Create">
             <ListItemIcon><AddIcon /></ListItemIcon>
             <ListItemText primary="Create" />
+          </ListItem>
+        </Link>
+        <Link className="sideNavLink" to="/tasks">
+          <ListItem button key="All Tasks">
+            <ListItemIcon><ListIcon /></ListItemIcon>
+            <ListItemText primary="All Tasks" />
           </ListItem>
         </Link>
       </List>
