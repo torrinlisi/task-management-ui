@@ -11,23 +11,30 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { Typography } from '@material-ui/core';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
 
 export default function TaskList(params) {
   const [tasks, setTasks] = useState([]);
-
   const [openModal, setOpenModal] = useState(false);
   const [modalInfo, setModalInfo] = useState({});
+  const [filter, setFilter] = useState(params.filterType)
+
+  //this won't change from it's initial value so a state is unnecessary
+  const isWidget = params.isFullScreen;
 
   //only get tasks on mount
   useEffect(() => {
     getTasks();
-  }, [])
+  }, [filter])
 
   const getTasks = () => {
-    console.log(params.filterType)
     axios.get("http://localhost:3000/", {
         params: {
-          filter: params.filterType
+          filter: filter
         }
       })
       .then(res => {
@@ -47,7 +54,6 @@ export default function TaskList(params) {
     setModalInfo(task);
     setOpenModal(true);
   }
-
 
   const completeTask = (index) => {
 
@@ -121,6 +127,53 @@ export default function TaskList(params) {
           </Paper>
         </Fade>
       </Modal>
+      {!isWidget &&
+        <>
+          <Typography varient="h3" className="sectionHeader">Task Viewer</Typography>
+          <div className="filterContent">
+            <FormControl component="fieldset">
+              <RadioGroup 
+                row 
+                aria-label="position"
+                name="position"
+                defaultValue=""
+                onChange={(e) => setFilter(e.target.value)}
+              >
+                <FormControlLabel
+                  value=""
+                  control={<Radio color="primary" />}
+                  label="All"
+                  labelPlacement="top"
+                />
+                <FormControlLabel
+                  value="urgent"
+                  control={<Radio color="primary" />}
+                  label="Urgent"
+                  labelPlacement="top"
+                />
+                <FormControlLabel
+                  value="upcoming"
+                  control={<Radio color="primary" />}
+                  label="Upcoming"
+                  labelPlacement="top"
+                />
+                <FormControlLabel 
+                  value="overdue"
+                  control={<Radio color="primary" />}
+                  label="Overdue"
+                  labelPlacement="top"
+                />
+                <FormControlLabel 
+                  value="completed"
+                  control={<Radio color="primary" />}
+                  label="Completed"
+                  labelPlacement="top"
+                />
+              </RadioGroup>
+            </FormControl>
+          </div>
+        </>
+      }
       <List subheader={<li />}>
         {tasks.map((task, index) => (
           <>

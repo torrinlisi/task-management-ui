@@ -12,14 +12,26 @@ export default function Home() {
         <Grid item xs={6}>
           <Paper className="formContainer">
             <Typography varient="h4">Upcoming Tasks</Typography>
-            <TaskList filterType="upcoming"/>
+            <TaskList filterType="upcoming" isFullScreen="false"/>
           </Paper>
         </Grid>
         <Grid item xs={6}>
           <Paper className="formContainer">
             {/* Upcoming and Overdue Tasks */}
             <Typography varient="h4">Urgent Tasks</Typography>
-            <TaskList filterType="urgent"/>
+            <TaskList filterType="urgent" isFullScreen="false"/>
+          </Paper>
+        </Grid>
+        <Grid item xs={6}>
+          <Paper className="formContainer">
+            <Typography varient="h4">Overdue Tasks</Typography>
+            <TaskList filterType="overdue" isFullScreen="false"/>
+          </Paper>
+        </Grid>
+        <Grid item xs={6}>
+          <Paper className="formContainer">
+            <Typography varient="h4">Completed Tasks</Typography>
+            <TaskList filterType="completed" isFullScreen="false"/>
           </Paper>
         </Grid>
       </Grid>

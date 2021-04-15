@@ -67,3 +67,9 @@
   width: 40%;
   height: 30%;
 }
+
+.filterContent {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
