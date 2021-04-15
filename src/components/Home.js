@@ -12,11 +12,15 @@ export default function Home() {
         <Grid item xs={6}>
           <Paper className="formContainer">
             <Typography varient="h4">Upcoming Tasks</Typography>
-            <TaskList />
+            <TaskList filterType="upcoming"/>
           </Paper>
         </Grid>
         <Grid item xs={6}>
-          <Paper className="formContainer">urgent</Paper>
+          <Paper className="formContainer">
+            {/* Upcoming and Overdue Tasks */}
+            <Typography varient="h4">Urgent Tasks</Typography>
+            <TaskList filterType="urgent"/>
+          </Paper>
         </Grid>
       </Grid>
     </>

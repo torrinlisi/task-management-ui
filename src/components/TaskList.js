@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -11,26 +12,28 @@ import Fade from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-export default function TaskList() {
-  const [tasks, setTasks] = useState([
-    {
-      "_id": 1,
-      "name": "Buy Grapes",
-      "description": "But don't give it to the dog...",
-      "due": "2021-04-14T12:00:00.000Z",
-      "isComplete": false
-    },
-    {
-      "_id": 2,
-      "name": "Buy Carrots",
-      "description": "And give it to the dog!",
-      "due": "2021-04-16T12:00:00.000Z",
-      "isComplete": false
-    }
-  ])
+export default function TaskList(params) {
+  const [tasks, setTasks] = useState([]);
 
   const [openModal, setOpenModal] = useState(false);
   const [modalInfo, setModalInfo] = useState({});
+
+  //only get tasks on mount
+  useEffect(() => {
+    getTasks();
+  }, [])
+
+  const getTasks = () => {
+    console.log(params.filterType)
+    axios.get("http://localhost:3000/", {
+        params: {
+          filter: params.filterType
+        }
+      })
+      .then(res => {
+        setTasks(res.data);
+      });
+  }
 
   const handleModalClose = () => {
     setOpenModal(false);
@@ -113,7 +116,7 @@ export default function TaskList() {
                 {!modalInfo.isComplete && <CheckCircleOutlineIcon onClick={() => completeTask(modalInfo.index)} edge="end" />}
               </h2>
               <p id="transition-modal-description">{modalInfo.description}</p>
-              <p id="transition-modal-due">{modalInfo.due}</p>
+              <p id="transition-modal-due">{new Date(modalInfo.due).toLocaleString('en-US', { timeZone: 'America/New_York' })}</p>
             </div>
           </Paper>
         </Fade>
