@@ -1,10 +1,10 @@
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
+// import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import Badge from '@material-ui/core/Badge';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+// import Badge from '@material-ui/core/Badge';
+// import AccountCircle from '@material-ui/icons/AccountCircle';
+// import NotificationsIcon from '@material-ui/icons/Notifications';
 
 import { Link } from 'react-router-dom';
 
@@ -21,7 +21,7 @@ export default function Home() {
                 </Typography>
               </Link>
             </div>
-            <div className="navigationOptions">
+            {/* <div className="navigationOptions">
               <IconButton color="inherit">
                 <Badge badgeContent={1} color="secondary">
                   <NotificationsIcon />
@@ -34,7 +34,7 @@ export default function Home() {
               >
                 <AccountCircle />
               </IconButton>
-            </div>
+            </div> */}
           </Toolbar>
         </AppBar>
       </div>

@@ -32,9 +32,9 @@ export default function SideBar() {
           </ListItem>
         </Link>
         <Link className="sideNavLink" to="/tasks">
-          <ListItem button key="All Tasks">
+          <ListItem button key="Task Viewer">
             <ListItemIcon><ListIcon /></ListItemIcon>
-            <ListItemText primary="All Tasks" />
+            <ListItemText primary="Task Viewer" />
           </ListItem>
         </Link>
       </List>

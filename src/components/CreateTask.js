@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
@@ -12,6 +13,14 @@ export default function CreateTask() {
 
   const saveTask = () => {
     console.log(taskName, taskDue, taskDescription);
+    axios.post("http://localhost:3000/", {
+        name: taskName,
+        description: taskDescription,
+        due: taskDue
+      })
+      .then(res => {
+        console.log("Success!")
+      });
   }
 
   return (
