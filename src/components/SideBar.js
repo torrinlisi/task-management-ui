@@ -1,14 +1,15 @@
+import { Link } from 'react-router-dom';
+
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+
 import HomeIcon from '@material-ui/icons/Home';
 import AddIcon from '@material-ui/icons/Add';
 import ListIcon from '@material-ui/icons/List';
-
-import { Link } from 'react-router-dom';
 
 export default function SideBar() {
   return(
@@ -16,6 +17,7 @@ export default function SideBar() {
       variant="permanent"
       anchor="left"
       className="sideNav"
+      id="sideDrawer"
     >
       <Divider />
       <List>

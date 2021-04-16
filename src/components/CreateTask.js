@@ -1,31 +1,39 @@
+import { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import { useState } from 'react';
 
 export default function CreateTask() {
+  //states for the controlled input fields
   const [taskName, setTaskName] = useState('');
   const [taskDue, setTaskDue] = useState('');
   const [taskDescription, setTaskDescription] = useState('');
 
-  const saveTask = () => {
-    console.log(taskName, taskDue, taskDescription);
-    axios.post("http://localhost:3000/", {
+  const [isCreated, setIsCreated] = useState(false);
+
+  const saveTask = async () => {
+    //call the api to create the task record
+    await axios.post("http://localhost:3000/", {
         name: taskName,
         description: taskDescription,
         due: taskDue
       })
-      .then(res => {
-        console.log("Success!")
-      });
+
+      console.log("Success!");
+
+      //this will trigger a render of the Redirect component which will bring us to the / route
+      setIsCreated(true);
   }
 
   return (
     //fragement so there is only 1 parent element
     <>
+      { isCreated && <Redirect to='/'/> }
       <Typography varient="h3" className="sectionHeader">Create Task</Typography>
       <Paper className="formContainer">
         <Grid spacing={2} container>
@@ -63,7 +71,7 @@ export default function CreateTask() {
         </Grid>
       </Paper>
       <div className="formButtonContainer">
-        <Button variant="contained" color="primary" onClick={() => saveTask()}>SAVE</Button>
+        <Button id="saveButton" variant="contained" color="primary" onClick={() => saveTask()}>SAVE</Button>
       </div>
     </>
   )
