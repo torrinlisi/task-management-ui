@@ -30,15 +30,14 @@ export default function TaskList({filterType, isWidget, triggerRerender, setTrig
   useEffect(() => {
 
     //since getTasks is only called on mount of update it is only in the useEffect block
-    const getTasks = () => {
-      axios.get(process.env.REACT_APP_API_URL, {
+    const getTasks = async () => {
+      let res = await axios.get(process.env.REACT_APP_API_URL, {
           params: {
             filter: filter
           }
-        })
-        .then(res => {
-          setTasks(res.data);
         });
+
+      setTasks(res.data);
     }
 
     //get tasks on first load or whenever a filter or triggerRerender is updated
@@ -51,6 +50,7 @@ export default function TaskList({filterType, isWidget, triggerRerender, setTrig
   }
 
   const handleModalOpen = (task, index) => {
+    console.log("hit")
     //add array index to task object in order to mark complete in task
     task['index'] = index
 
@@ -60,31 +60,29 @@ export default function TaskList({filterType, isWidget, triggerRerender, setTrig
   }
 
   //complete + uncomplete
-  const completeTask = (index) => {
+  const completeTask = async (index) => {
     let task = tasks[index];
     let isCompleteNew = !task.isComplete
 
     //call api to update task
-    axios.put(process.env.REACT_APP_API_URL, { _id: task._id, isComplete: isCompleteNew})
-      .then(res => {
-        handleModalClose();
-        rerenderProcess(index, isCompleteNew, true)
-      });
+    await axios.put(process.env.REACT_APP_API_URL, { _id: task._id, isComplete: isCompleteNew});
+
+    handleModalClose();
+    rerenderProcess(index, isCompleteNew, true)
   }
 
-  const deleteTask = (index) => {
+  const deleteTask = async (index) => {
     let task = tasks[index];
 
     //call api to delete task
-    axios.delete(process.env.REACT_APP_API_URL, {
+    await axios.delete(process.env.REACT_APP_API_URL, {
       params: { 
         _id: task._id
       }
-    })
-      .then(res => {
-        handleModalClose();
-        rerenderProcess(index)
-      });
+      })
+
+      handleModalClose();
+      rerenderProcess(index);
   }
 
   //this really just determines if we want a local task update or to force all sibling components to get updated tasks
@@ -123,7 +121,7 @@ export default function TaskList({filterType, isWidget, triggerRerender, setTrig
         <Fade in={openModal}>
           <Paper className="modalPaper">
             <div>
-              <h2 id="transition-modal-title">
+              <h2 id="transition-modal-title" data-testid="modalHeader">
                 {modalInfo.name}
                 {modalInfo.isComplete && 
                   <CheckCircleIcon 
@@ -198,11 +196,12 @@ export default function TaskList({filterType, isWidget, triggerRerender, setTrig
       <List subheader={<li />}>
         {tasks.map((task, index) => (
           <ListItem button key={`${index}_${filterType}`} onClick={() => handleModalOpen(task, index)}>
-            <ListItemText primary={`${task.name.substring(0, 40)}`} />
+            <ListItemText data-testid="listItem" primary={`${task.name.substring(0, 40)}`} />
             <ListItemSecondaryAction>
               {task.isComplete &&
                 <CheckCircleIcon
                 className="actionIcon"
+                  data-testid="completedTaskButton"
                   onClick={() => completeTask(index)}
                   edge="end"
                 />
@@ -210,12 +209,14 @@ export default function TaskList({filterType, isWidget, triggerRerender, setTrig
               {!task.isComplete &&
                 <CheckCircleOutlineIcon
                   className="actionIcon"
+                  data-testid="uncompletedTaskButton"
                   onClick={() => completeTask(index)}
                   edge="end"
                 />
               }
               <DeleteIcon
                 className="actionIcon"
+                data-testid="deleteTaskButton"
                 onClick={() => deleteTask(index)}
                 edge="end"
               />
