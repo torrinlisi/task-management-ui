@@ -1,0 +1,30 @@
+.formContainer {
+  margin-top: 20px;
+  padding: 15px 30px 30px 30px;
+}
+
+.formButtonContainer {
+  float: right;
+  padding-top: 5px;
+}
+
+.modalStyle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalPaper {
+  width: 40%;
+  height: 30%;
+}
+
+.filterContent {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.actionIcon:hover {
+  cursor: pointer;
+}

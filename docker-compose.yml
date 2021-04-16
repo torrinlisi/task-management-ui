@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  taskui:
+    image: taskui
+    build: .
+    volumes:
+        - './src'
+        - './node_modules'
+    environment:
+        - REACT_APP_API_URL=http://localhost:9999
+    ports:
+        - "3000:3000"
