@@ -18,7 +18,7 @@ export default function CreateTask() {
 
   const saveTask = async () => {
     //call the api to create the task record
-    await axios.post("http://localhost:3000/", {
+    await axios.post(process.env.REACT_APP_API_URL, {
         name: taskName,
         description: taskDescription,
         due: taskDue

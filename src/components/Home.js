@@ -6,6 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import TaskList from './TaskList';
 
 export default function Home() {
+  //setTriggerRerender will be called from child components that will kickoff useeffect in their siblings
   const [triggerRerender, setTriggerRerender] = useState(0);
 
   return (

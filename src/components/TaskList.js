@@ -28,8 +28,10 @@ export default function TaskList({filterType, isWidget, triggerRerender, setTrig
 
   //only get tasks on mount
   useEffect(() => {
+
+    //since getTasks is only called on mount of update it is only in the useEffect block
     const getTasks = () => {
-      axios.get("http://localhost:3000/", {
+      axios.get(process.env.REACT_APP_API_URL, {
           params: {
             filter: filter
           }
@@ -41,7 +43,7 @@ export default function TaskList({filterType, isWidget, triggerRerender, setTrig
 
     //get tasks on first load or whenever a filter or triggerRerender is updated
     getTasks();
-  }, [filter, triggerRerender])
+  }, [filter, triggerRerender]);
 
   const handleModalClose = () => {
     setOpenModal(false);
@@ -52,16 +54,18 @@ export default function TaskList({filterType, isWidget, triggerRerender, setTrig
     //add array index to task object in order to mark complete in task
     task['index'] = index
 
+    //loads data into state that will be displayed in modal
     setModalInfo(task);
     setOpenModal(true);
   }
 
+  //complete + uncomplete
   const completeTask = (index) => {
     let task = tasks[index];
     let isCompleteNew = !task.isComplete
 
     //call api to update task
-    axios.put("http://localhost:3000/", { _id: task._id, isComplete: isCompleteNew})
+    axios.put(process.env.REACT_APP_API_URL, { _id: task._id, isComplete: isCompleteNew})
       .then(res => {
         handleModalClose();
         rerenderProcess(index, isCompleteNew, true)
@@ -72,7 +76,7 @@ export default function TaskList({filterType, isWidget, triggerRerender, setTrig
     let task = tasks[index];
 
     //call api to delete task
-    axios.delete("http://localhost:3000/", {
+    axios.delete(process.env.REACT_APP_API_URL, {
       params: { 
         _id: task._id
       }
